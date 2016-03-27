@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://weixin.bbxpc.com/bind.jsp -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>小滴哥</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes"><!-- 删除苹果默认的工具栏和菜单栏 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 设置苹果工具栏颜色 -->
+	<meta name="format-detection" content="telephone=no, email=no"><!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+	<link rel="stylesheet" href="./file_login/global.css">
+	<link rel="stylesheet" href="./file_login/style.css">
+	<!-- js插件 -->
+	<script src="./file_login/zepto.min.js"></script>
+	<script src="./file_login/touch.js"></script>
+	<!-- 自定义js -->
+	<script src="./file_login/common.js"></script>
+</head>
+<body style="background:#f4f4f4">
+	<!-- 公共头部 -->
+	<header>
+		<a class="hd-back" href="http://weixin.bbxpc.com/order.jsp"></a>登陆
+	</header>
+	<!-- 中间内容 -->
+	<article class="content input-box">
+		<h2 class="">为了方便司机联系您，请您登陆小滴哥账号</h2>
+		<article class="input-list">
+			<form name="bindForm" id="bindForm" method="POST">
+				<section class="input-section input-apart">
+					<input type="tel" id="phone" name="phone" maxlength="11" placeholder="请输入11位手机号">
+				</section>
+				<section class="input-section">
+					<input type="tel" id="code" name="pwd" onkeyup="this.value=this.value.replace(/\D/g,&#39;&#39;)" onafterpaste="this.value=this.value.replace(/\D/g,&#39;&#39;)" maxlength="10" placeholder="密码">
+				</section>
+				<section class="input-section">
+					<input type="tel" id="mode_id" name="model_id" maxlength="4" placeholder="车型id">
+				</section>
+				<section class="input-submit">
+					<input type="button" value="开始">
+				</section>
+			</form>
+			<p class="bottom-tips">登录即表示您同意<a href="http://weixin.bbxpc.com/tos.html" title="">《小滴哥服务条款》</a></p>
+		</article>
+	</article>
+<script type="text/javascript">
+var second=60;
+var timer;
+function change()
+{
+  second--;
+  $("#code").focus();
+ if(second>-1)
+ {
+  document.getElementById("getVcode").innerHTML=second+'s';
+  timer = setTimeout('change()',1000);//调用自身实现
+ }
+ else
+ {
+ clearTimeout(timer);
+	$("#getVcode").removeClass("on");
+   	$("#getVcode").html("获取验证码");
+   	second=60;
+ }
+}
+//开始绑定
+$('.input-submit').tap(function(){
+var phone=$("#phone").val();
+var code =$("#code").val();//验证码
+	if (checkPhone(phone)==false){
+		alert('请输入正确的手机号码');
+		return;
+	}
+	if(code.length<=0){
+		alert("请输入密码");
+		return;
+	}
+	var url = "http://119.29.137.98/Api/Passenger/login";
+	$.ajax({
+		  type: 'POST',
+		  url: url,
+		  timeout:100000,
+		  data:$('#bindForm').serialize(),
+		  dataType: 'json',
+		  success: function(data){
+		  	alert("success："+data);
+		  if(data.status=="0"){
+ 			 //登录成功
+ 			 location.href='http://www.baidu.com';
+ 			}else{
+ 				alert(data.message);
+ 			}
+		  },
+		  error: function(xhr, type){
+		  	alert(xhr+'网络超时，请检查网络'+type);
+		  }
+		});
+});
+$("#getVcode").tap(function(){
+	var phone=$("#phone").val();
+	if (checkPhone(phone)==false){
+		alert('请输入正确的手机号码');
+		return;
+	}
+	$(this).addClass("on");//css modify
+	sendSMS(phone);//send sms
+	});
+	
+	//send sms
+	function sendSMS(phone){
+	//var url="/user?method=sms&phone="+phone;
+		$.ajax({
+		  type: 'GET',
+		  url: 'user',
+		  data: 'method=sms&phone='+phone,
+		  dataType: 'json',
+		  success: function(data){
+		  if(data.status=="0"){
+ 			 timer = setTimeout('change()',1000);//count down发送成功才倒计时
+ 			}else{
+ 				alert(data.message);
+ 			}
+		  },
+		  error: function(xhr, type){
+		  }
+		});
+	}
+	//check input
+	function checkPhone(phone){
+	var telReg = !!phone.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[01678]|18[0-9]|14[57])[0-9]{8}$/);
+	return telReg;
+	}
+	function clearCookie(name) {  
+    setCookie(name, "", -1);  
+}  
+</script>
+
+</body></html>
