@@ -83,15 +83,14 @@ var code =$("#code").val();//验证码
 		  data:$('#bindForm').serialize(),
 		  dataType: 'json',
 		  success: function(data){
+		  var list = data.data;
 		  if(data.ret=="0"){
  			 //登录成功
- 			 for (var i = Things.length - 1; i >= 0; i--) {
- 			 	Things[i]
- 			 }
- 			 var token = data.token;
- 			 alert("token:"+data.token+",model_id:"+data.model_id);
- 			 alert(data.data.company_name);
- 			 location.href='http://www.baidu.com';
+ 			 localStorage.xdg_token = data.token;
+ 			 localStorage.xdg_name = list.name;
+ 			 localStorage.xdg_company_name = list.company_name;
+ 			 localStorage.xdg_model_id = data.model_id;
+ 			 location.href='orderlist.html';
  			}else{
  				alert("账号或密码错误");
  			}

@@ -1,0 +1,379 @@
+.mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+	display: none;
+	background-color: rgba(0,0,0,.5)
+}
+
+#d-wall {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 998;
+	opacity: .3;
+	width: 100%;
+	height: 100%;
+	background-color: #000
+}
+
+#d-wrap {
+	position: fixed;
+	z-index: 999;
+	border-radius: 5px;
+	padding: 0
+}
+
+#d-wrap .confirm,#d-wrap .alert {
+	padding: 6.79%
+}
+
+#d-wrap .confirm .d-icon,#d-wrap .alert .d-icon {
+	display: inline-block;
+	min-width: 45px;
+	min-height: 45px;
+	line-height: 45px;
+	margin: 5px 0 12px;
+	background-color: #f0f0f0;
+	border-radius: 50%
+}
+
+#d-wrap .loading,#d-wrap .tip {
+	text-align: center;
+	padding: 0 8px
+}
+
+#d-wrap .loading .d-icon {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin: 24px 0 18px;
+	line-height: 40px;
+	background: 0 0
+}
+
+#d-wrap .loading .icon-loading {
+	background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.1/loading_2.gif);
+	background-size: 40px 40px;
+	background-repeat: no-repeat
+}
+
+#d-wrap .tip .d-icon {
+	display: inline-block;
+	width: 45px;
+	height: 45px;
+	line-height: 45px;
+	margin: 24px 0 18px
+}
+
+#d-wrap .tip .icon-tip {
+	background-repeat: no-repeat;
+}
+
+#d-wrap .alert .icon-alert {
+	background-repeat: no-repeat;
+}
+
+#d-wrap .floading .icon-flat {
+	background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.1/i-loading.gif);
+	background-size: 43px 34px;
+	background-repeat: no-repeat;
+	height: 43px;
+	width: 43px;
+	margin: 0 auto
+}
+
+#d-wrap .d-title {
+	color: #333;
+	font-family: STHeitiSC-Medium;
+	font-size: 1.9rem;
+	margin-bottom: 4px
+}
+
+#d-wrap .d-tip {
+	line-height: 1.5em;
+	margin-bottom: 5px
+}
+
+#d-wrap a[class^=btn-] {
+	display: inline-block;
+	width: 100%;
+	height: 42px;
+	line-height: 42px;
+	margin: 4px 0;
+	border-radius: 5px;
+	font-size: 1.6rem;
+	text-align: center;
+	text-decoration: none;
+	cursor: default;
+	background-clip: padding-box
+}
+
+#d-wrap .btn-white {
+	background-color: #fff;
+	border: 1px solid #cfcfcf;
+	color: #666
+}
+
+#d-wrap .btn-orange {
+	background-color: #ff8a01;
+	color: #fff
+}
+
+#d-wrap .confirm a[class^=btn-] {
+	width: 46.7%
+}
+
+#d-wrap .confirm a[class^=btn-]:first-child {
+	float: left
+}
+
+#d-wrap .confirm a[class^=btn-]:last-child {
+	float: right
+}
+
+#d-wrap .icon-confirm {
+	background-repeat: no-repeat;
+}
+
+#d-wrap .d-close {
+	position: absolute;
+	top: -7px;
+	right: -7px;
+	width: 21px;
+	height: 21px;
+	background-repeat: no-repeat;
+}
+
+.d-btns {
+	width: 100%
+}
+
+.d-ext {
+	padding-top: 12px;
+	font-size: 1.2rem;
+	color: #999
+}
+
+.loading-logo {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 43px;
+	height: 34px;
+	margin-left: -22px;
+	background-repeat: no-repeat;
+	background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.1/i-loading.gif);
+	background-size: 43px 34px
+}
+
+#d-wrap .d-close {
+	background-position: 0px 0px
+}
+
+#d-wrap .d-close {
+	background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.1/dialog_z.png)
+}
+
+#d-wrap .tip .icon-tip {
+	background-position: 0px 0px
+}
+
+#d-wrap .alert .icon-alert {
+	background-position: -50px 0px
+}
+
+#d-wrap .icon-confirm {
+	background-position: -50px 0px
+}
+
+#d-wrap .tip .icon-tip,#d-wrap .alert .icon-alert,#d-wrap .icon-confirm {
+	background-size: 100px 45px;
+	background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.1/dialog_0.5_z.png)
+}
+
+.orderlist .wrapper .title {
+	line-height: 25px;
+	padding: 0 10px;
+	font-size: 1.2rem;
+	color: #999;
+	background: #f0f0f0
+}
+
+.orderlist .wrapper .item {
+	position: relative;
+	height: 66px;
+	line-height: 22px;
+	padding: 15px 10px;
+	color: #666;
+	font-size: 1.4rem;
+	border-bottom: 1px solid #f5f5f5
+}
+
+.orderlist .wrapper .item:active {
+	background-color: #e5e5e5
+}
+
+.orderlist .wrapper .item:after {
+	position: absolute;
+	top: 44px;
+	right: 10px;
+	content: "\6c";
+	font-family: home-icon;
+	color: #999
+}
+
+.orderlist .wrapper .item .datetime,.orderlist .wrapper .item .tip {
+	margin-right: 7px;
+	font-family: Helvetica;
+	font-weight: bolder
+}
+
+.orderlist .wrapper .item .datetime em {
+	color: #ff8903
+}
+
+.orderlist .wrapper .item .udache {
+	display: inline-block;
+	height: 18px;
+	line-height: 1.8rem;
+	padding: 0 3px;
+	margin-right: 7px;
+	color: #999;
+	border: 1px solid #c6c6c6;
+	border-radius: 3px;
+	text-align: center
+}
+
+.orderlist .wrapper .item .cost em {
+	color: #ff8903
+}
+
+.orderlist .wrapper .item .comment {
+	float: right;
+	color: #999
+}
+
+.orderlist .wrapper .item .path-start,.orderlist .wrapper .item .path-end {
+	float: left;
+	width: 90%;
+	margin-right: 12px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis
+}
+
+.orderlist .wrapper .item .path-start:before,.orderlist .wrapper .item .path-end:before {
+	margin-right: 5px;
+	content: "\66";
+	font-family: home-icon;
+	font-size: 18px
+}
+
+.orderlist .wrapper .item .path-start:empty:before,.orderlist .wrapper .item .path-end:empty:before {
+	content: ""
+}
+
+.orderlist .wrapper .item .path-start:before {
+	color: #41b07b
+}
+
+.orderlist .wrapper .item .path-end:before {
+	color: #e37378
+}
+
+.orderlist .underway .item .comment em,.orderlist .underway .item .datetime em {
+	color: #ff8903
+}
+
+.orderlist .nodata {
+	display: none;
+	padding-top: 40px
+}
+
+.orderlist .nodata .desc {
+	display: block;
+	line-height: 1.5em;
+	text-align: center;
+	color: #999;
+	font-size: 1.2rem
+}
+
+.orderlist .nodata .desc:before {
+	display: block;
+	position: relative;
+	top: -2px;
+	width: 56px;
+	height: 56px;
+	line-height: 58px;
+	margin: 0 auto 15px;
+	overflow: hidden;
+	background: #f0f0f0;
+	content: "\62";
+	font-family: home-icon;
+	text-indent: -2px;
+	color: #fff;
+	font-size: 60px;
+	border-radius: .5em
+}
+
+.orderlist .load-more {
+	line-height: 50px;
+	font-size: 1.2rem;
+	text-align: center;
+	color: #999
+}
+
+.orderlist .load-more em {
+	line-height: 50px;
+	padding: 10px;
+	margin-right: 5px;
+	opacity: .66;
+	background-image: url(//shield.xiaojukeji.com/c/webapp-travel/0.0.4/orderlist/loading_2.gif);
+	background-repeat: no-repeat;
+	background-size: 20px 20px;
+	background-position: center center
+}
+
+html,body {
+	font-size: 62.5%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #fff;
+	font-family: STHeitiSC-Light,Helvetica-Light,arial,sans-serif,'Droid Sans Fallback'
+}
+
+@font-face {
+	font-family:home-icon;
+	src:url(font/home-icon.eot);
+	src:url(font/home-icon.eot#iefix) format('embedded-opentype'),
+	url(font/home-icon.woff) format('woff'),
+	url(font/home-icon.ttf) format('truetype'),
+	url(//shield.xiaojukeji.com/c/webapp-travel/0.0.4/common/font/home-icon.svg#home-icon) format('svg');
+	font-weight:400;font-style:normal
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+
+.clearfix {
+	display: inline-block
+}
+
+em {
+	font-style: normal
+}
+
+#orderlist {
+	width: 100%;
+	overflow: hidden
+}
