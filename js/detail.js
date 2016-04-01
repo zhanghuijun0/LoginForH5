@@ -30,7 +30,7 @@ function getOrderDetails(token,applyId) {
 				console.log("success");
 				var status = data.data.status;
 				document.write("status:"+status);
-				getDateil(data);
+				getDateil(status,data);
 			}else{
 				console.log(data.ret);
 			}
@@ -44,8 +44,7 @@ function getOrderDetails(token,applyId) {
 /**
 *0处理中、1已派单、 2进行中、3 订单取消、 4待支付 、5待评价、6 已结束、 7订单中断
 */
-function getDateil(data) {
-	var status = data.data.status;
+function getDateil(status,data) {
 	switch(status){
 		case '0':
 		document.write("0处理中");
@@ -73,6 +72,31 @@ function getDateil(data) {
 		break;
 		default:
 		document.write("其他");
+		break;
 	}
-	document.write("---status:"+status);
+}
+//
+function processing(data) {
+	
+}
+function ordering(data) {
+	
+}
+function running(data) {
+	
+}
+function processing(data) {
+	
+}
+function processing(data) {
+	
+}
+function processing(data) {
+	
+}
+function processing(data) {
+	
+}
+function processing(data) {
+	
 }
