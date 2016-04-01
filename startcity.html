@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<title>选择出发地</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes"><!-- 删除苹果默认的工具栏和菜单栏 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 设置苹果工具栏颜色 -->
+	<meta name="format-detection" content="telephone=no, email=no"><!--忽略页面中的数字识别为电话，忽略email识别 -->
+	<link rel="stylesheet" href="./css/global.css">
+	<link rel="stylesheet" href="./css/style.css">
+
+</head>
+<body>
+	<div id="container" style="display:none"></div>
+	<!-- 中间内容 -->
+	<article class="place-select">
+		<section class="place-top">
+			<a class="place-city" href="#"><i></i></a>
+			<input type="text" id="suggestId" name="suggestId" oninput="suggest();" placeholder="从哪出发">
+			<span class="place-cancel">取消</span>
+		</section>
+		<ul class="place-list start-list"></ul>
+	</article>
+</body>
+</html>
+
+
+<script type="text/javascript" src="js/cookies.js" async="async"></script>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=hTd7IF50IZjISDUUrS3oSoaiMvMArgfv" type="text/javascript"></script>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+
+<!-- 自定义js -->
+<script src="./js/common.js" async="async"></script>
+
+<script type="text/javascript">
+	var lng ;
+	var lat ;
+	var endCity;
+	window.onload=function(){
+		lng = getCookie("startLng");
+		lat = getCookie("startLat");
+		var location = getCookie("xdg_locCityName");
+		$(".place-city").removeAttr("href");
+		$(".place-city").html(location+'<i></i>');
+	}
+	/**
+	 *onChangeListener
+	 */	
+	function suggest(){
+		$(".start-list li").remove();
+		console.clear();
+		var search=document.getElementById("suggestId").value;
+		if(search.length<=0){
+			return;
+		}
+		getNearbyLocation(search);
+	}
+
+	/**
+	 *获得当前位置附近的地点列表
+	 */
+	function getNearbyLocation(searchName){
+		var map = new BMap.Map("container");
+		map.centerAndZoom(new BMap.Point(lng,lat), 13);      
+		var options = {      
+		   onSearchComplete: function(results){      
+		       if (local.getStatus() == BMAP_STATUS_SUCCESS){      
+		             // 判断状态是否正确      
+		             var html_list = "";   
+		             for (var i = 0; i < results.getCurrentNumPois(); i ++){
+					 	console.log(results.getPoi(i).city+"--"+searchName);
+					 	// if (results.getPoi(i).address.indexOf(searchName)==0) {
+					 		html_list += '<li startCity = "'+results.getPoi(i).city+'" startlat = "'+results.getPoi(i).point.lat+'" startlng = "'+results.getPoi(i).point.lng+'"><strong>'+results.getPoi(i).title+'</strong><p><i class="des-icon"></i>'+results.getPoi(i).address+'</p></li>';
+		             	console.log(results.getPoi(i).city + ", " +results.getPoi(i).title + ", " + results.getPoi(i).address+ ", " + results.getPoi(i).point.lng+ ", " + results.getPoi(i).point.lat);  
+
+		             	// }
+		             }  
+		            $(".start-list").html(html_list);
+					$(".start-list li").click(function(){
+						var startCity=$(this).attr("startCity");
+						var startAddr=$(this).find("strong").text();
+						var startLat=$(this).attr("startlat");
+						var startLng=$(this).attr("startlng");
+						setCookie("startCity",startCity);
+						setCookie("startAddr",startAddr);
+						setCookie("startLat",startLat);
+						setCookie("startLng",startLng);
+						location.href='call.html';
+					});
+				}
+		   }
+		};
+		var local = new BMap.LocalSearch(map, options);
+		local.search(searchName);
+	}
+
+	$(".place-cancel").click(function(){
+		location.href='call.html';
+	});
+
+</script>

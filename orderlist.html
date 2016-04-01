@@ -2,30 +2,66 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>订单列表</title>
+	<title>小滴哥</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes"><!-- 删除苹果默认的工具栏和菜单栏 -->
 	<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 设置苹果工具栏颜色 -->
-	<link rel="stylesheet" type="text/css" href="./file_order_list/reset.css">
-	<link rel="stylesheet" type="text/css" href="./file_order_list/list.css">
+	<link rel="stylesheet" type="text/css" href="./css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./css/list.css">
 	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
-	<!--http://119.29.137.98/Api/OrderApply/pProgress?page=1&page_size=10&token=d1a5db6ab87cc920036d4a1bded8fd78&token=d1a5db6ab87cc920036d4a1bded8fd78-->
+	<script src="./js/cookies.js"></script>
+	<style type="text/css">
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 3.46rem;
+    line-height: 3.46rem;
+    text-align: center;
+    font-size: 1.35rem;
+    color: #1a1a1a;
+    background: #fff;
+    border-bottom: 1px solid #e3e3e3;
+    z-index: 100;
+    position: relative;
+    margin: 0 auto;
+    max-width: 640px;
+}
+
+.hd-back {
+    background: url('images/back.png') center no-repeat;
+    background-size: 0.67rem 1.33rem;
+}
+
+.hd-back, .hd-personal {
+    position: absolute;
+    left: 0.67rem;
+    top: 0.83rem;
+    width: 1.67rem;
+    height: 1.67rem;
+}
+	</style>
+
+
 </head>
 <body>
+	<header>
+		<a class="hd-back" href="call.html"></a><em>订单列表</em>
+	</header>
 	<div id="orderlist">
 		<div class="orderlist"> 
 			<section class="wrapper underway"> 
 				<ul class="underway-hook"></ul> 
 			</section> 
-			<section class="wrapper"> 
-				<h2 class="title">已完成订单</h2> 
+			<section class="wrapper">  
 				<ul class="finished-hook" id="order_list">
 					<script type="text/javascript">
 					window.onload=post_list();
 					function post_list() {
-						var token = localStorage.xdg_token;
+						var token = getCookie("xdg_token");
 						if (!token) {
 							alert("请登陆");
 							location.href='login.html';
@@ -45,13 +81,35 @@
 					 			 var list = data.list;
 					 			 var docs = "";
 					 			 	for (var i = 0; i < list.length ; i++) {
-										var doc = '<li class="item"><span class="datetime">'+list[i].apply_time+'</span><span class="udache" style="">快车</span><span class="tip"></span><span class="comment"><em>'+list[i].status+'</em></span><span class="path-start">'+list[i].from_place+'</span><span class="path-end">'+list[i].to_place+'</span><span class="i-next"></span></li>';
-										// document.append(doc);
+					 			 		var statusStr=list[i].status;
+					 			 		if(list[i].status==6){
+					 			 			statusStr="已结束";
+					 			 		}else if(list[i].status==5){
+											statusStr="待评价";
+					 			 		}else if(list[i].status==4){
+											statusStr="待支付";
+					 			 		}else if(list[i].status==3){
+											statusStr="订单取消";
+					 			 		}else if(list[i].status==2){
+											statusStr="进行中";
+					 			 		}else if(list[i].status==1){
+											statusStr="已派单";
+					 			 		}else if(list[i].status==7){
+											statusStr="订单中断";
+					 			 		}else if(list[i].status==0){
+											statusStr="处理中";
+					 			 		}
+										var doc = '<li class="item" applyid='+list[i].id+'><span class="datetime">'+list[i].apply_time+'</span><span class="udache">小滴哥专车</span><span class="tip"></span><span class="comment"><em>'+statusStr+'</em></span><span class="path-start">'+list[i].from_place+'</span><span class="path-end">'+list[i].to_place+'</span><span class="i-next"></span></li>';
 										 docs=docs+doc
 					 			 	}
 					 			 	document.getElementById("order_list").innerHTML=docs;
+					 			 	$(".finished-hook li").click(function(){
+					 			 		var applyid = $(this).attr("applyid");
+					 			 		location.href='detail.html?applyid='+applyid+"&token="+token;
+										console.log("applyid:"+applyid);
+									});
 					 			}else{
-					 				// alert("token已失效"+data.ret+","+url);
+					 				console.log("订单列表获取失败："+data.ret);
 					 				location.href='login.html';
 					 				return;
 					 			}

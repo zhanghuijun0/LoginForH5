@@ -9,18 +9,13 @@
 	<meta name="apple-mobile-web-app-capable" content="yes"><!-- 删除苹果默认的工具栏和菜单栏 -->
 	<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 设置苹果工具栏颜色 -->
 	<meta name="format-detection" content="telephone=no, email=no"><!-- 忽略页面中的数字识别为电话，忽略email识别 -->
-	<link rel="stylesheet" href="./file_login/global.css">
-	<link rel="stylesheet" href="./file_login/style.css">
-	<!-- js插件 -->
-	<script src="./file_login/zepto.min.js"></script>
-	<script src="./file_login/touch.js"></script>
-	<!-- 自定义js -->
-	<script src="./file_login/common.js"></script>
+	<link rel="stylesheet" href="./css/global.css">
+	<link rel="stylesheet" href="./css/style.css">
 </head>
 <body style="background:#f4f4f4">
 	<!-- 公共头部 -->
 	<header>
-		<a class="hd-back" href="#"></a>乘客登陆
+		<a class="hd-back" href="call.html"></a><em>乘客登陆</em>
 	</header>
 	<!-- 中间内容 -->
 	<article class="content input-box">
@@ -33,110 +28,89 @@
 				<section class="input-section">
 					<input type="password" id="code" name="pwd" maxlength="15" placeholder="请输入密码">
 				</section>
-				<!-- <section class="input-section">
-					<input type="tel" id="mode_id" name="model_id" maxlength="4" placeholder="车型id">
-				</section> -->
 				<section class="input-submit">
-					<input type="button" value="开始">
+					<input type="button" value="登陆">
 				</section>
 			</form>
 			<p class="bottom-tips">登录即表示您同意<a href="#" title="">《小滴哥服务条款》</a></p>
 		</article>
 	</article>
-<script type="text/javascript">
-var second=60;
-var timer;
-function change()
-{
-  second--;
-  $("#code").focus();
- if(second>-1)
- {
-  document.getElementById("getVcode").innerHTML=second+'s';
-  timer = setTimeout('change()',1000);//调用自身实现
- }
- else
- {
- clearTimeout(timer);
-	$("#getVcode").removeClass("on");
-   	$("#getVcode").html("获取验证码");
-   	second=60;
- }
-}
-//开始绑定
-$('.input-submit').tap(function(){
-var phone=$("#phone").val();
-var code =$("#code").val();//验证码
-	if (checkPhone(phone)==false){
-		alert('请输入正确的手机号码');
-		return;
-	}
-	if(code.length<=0){
-		alert("请输入密码");
-		return;
-	}
-	var url = "http://119.29.137.98/Api/Passenger/login";
-	$.ajax({
-		  type: 'POST',
-		  url: url,
-		  timeout:100000,
-		  data:$('#bindForm').serialize(),
-		  dataType: 'json',
-		  success: function(data){
-		  var list = data.data;
-		  if(data.ret=="0"){
- 			 //登录成功
- 			 localStorage.xdg_token = data.token;
- 			 localStorage.xdg_name = list.name;
- 			 localStorage.xdg_company_name = list.company_name;
- 			 localStorage.xdg_model_id = data.model_id;
- 			 location.href='orderlist.html';
- 			}else{
- 				alert("账号或密码错误");
- 			}
-		  },
-		  error: function(xhr, type){
-		  	alert('网络超时，请检查网络');
-		  }
-		});
-});
-$("#getVcode").tap(function(){
-	var phone=$("#phone").val();
-	if (checkPhone(phone)==false){
-		alert('请输入正确的手机号码');
-		return;
-	}
-	$(this).addClass("on");//css modify
-	sendSMS(phone);//send sms
-	});
-	
-	//send sms
-	function sendSMS(phone){
-	//var url="/user?method=sms&phone="+phone;
-		$.ajax({
-		  type: 'GET',
-		  url: 'user',
-		  data: 'method=sms&phone='+phone,
-		  dataType: 'json',
-		  success: function(data){
-		  if(data.status=="0"){
- 			 timer = setTimeout('change()',1000);//count down发送成功才倒计时
- 			}else{
- 				alert(data.message);
- 			}
-		  },
-		  error: function(xhr, type){
-		  }
-		});
-	}
-	//check input
-	function checkPhone(phone){
-	var telReg = !!phone.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[01678]|18[0-9]|14[57])[0-9]{8}$/);
-	return telReg;
-	}
-	function clearCookie(name) {  
-    setCookie(name, "", -1);  
-}  
-</script>
+	<article class="content personal-info">
+		<div>
+			<ul>
+				<li class="item" id="info">个人信息</li>
+				<li class="item" id="order-list">订单列表</li>
+				<li class="item" id="balance">额度</li>
+			</ul>
+			<a id="logout">退出登录</a>
+		</div>
+	</article>
 
-</body></html>
+<style type="text/css">
+	#logout{
+		display: block;
+		margin: 1.1rem auto 0;
+		max-width: 640px;
+		width: 70%;
+		line-height: 2.71rem;
+		text-align: center;
+		border: 1px solid #00aaff;
+		color: #00aaff;
+		font-size: 1.29rem;
+		border-radius: 1.7rem;
+		-webkit-appearance: none;
+	}
+	ul{
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font-weight: 200;
+		vertical-align: baseline;
+		display: block;
+		list-style-type: disc;
+		-webkit-margin-before: 1em;
+		-webkit-margin-after: 1em;
+		-webkit-margin-start: 0px;
+		-webkit-margin-end: 0px;
+	}
+	li{
+		list-style: none;
+		padding: 0;
+	}
+	.item{
+		position: relative;
+		line-height: 22px;
+		padding: 15px 10px;
+		color: #000;
+		font-size: 1.4rem;
+		border-bottom: 1px solid #00AAFF;
+	}
+</style>
+</body>
+</html>
+
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+<!-- 自定义js -->
+<script src="./js/common.js"></script>
+<script src="./js/cookies.js"></script>
+<script src="./js/login.js"></script>
+<script type="text/javascript">
+	window.onload = ifLogin();
+	//登陆
+	$('.input-submit').click(function(){
+		login();
+	});
+	$("#info").click(function() {
+		alert(getCookie("xdg_company_name"));
+	});
+	$("#order-list").click(function() {
+		location.href='orderlist.html';
+	});
+	$("#balance").click(function() {
+		alert("实现中");
+	});
+	$("#logout").click(function() {
+		logout();
+	});
+</script>

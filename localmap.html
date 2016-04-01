@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=hTd7IF50IZjISDUUrS3oSoaiMvMArgfv" type="text/javascript"></script>
+	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+</head>
+<body>
+<div id="container"><div id = "log"><br></div></div>
+<script type="text/javascript">
+
+
+window.onload = getNearbyLocation("公园");
+	function getNearbyLocation(searchName){
+		var map = new BMap.Map("container");          
+		map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);      
+		var options = {      
+		   onSearchComplete: function(results){      
+		       if (local.getStatus() == BMAP_STATUS_SUCCESS){      
+		             // 判断状态是否正确      
+		             var s = [];      
+		             for (var i = 0; i < results.getCurrentNumPois(); i ++){    
+		             console.log(results.getPoi(i).city + ", " +results.getPoi(i).title + ", " + results.getPoi(i).address+ ", " + results.getPoi(i).point.lng+ ", " + results.getPoi(i).point.lat);  
+		             }      
+		       }      
+		   }      
+		};      
+		var local = new BMap.LocalSearch(map, options);      
+		local.search(searchName);
+	}
+
+</script>
+</body>
+</html>

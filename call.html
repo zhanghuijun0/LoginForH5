@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=hTd7IF50IZjISDUUrS3oSoaiMvMArgfv" type="text/javascript"></script>
+	<!-- js插件 -->
+	<script src="./js/zepto.min.js"></script>
+	<script src="./js/touch.js"></script>
+	<!-- 自定义js -->
+	<script src="./js/common.js"></script>
+	<script type="text/javascript" src="js/cookies.js"></script>
+	<script type="text/javascript" src="js/call.js"></script>
+	<title>小滴哥</title>
+	<!-- <link rel="stylesheet" type="text/css" href="./call_files/reset.css"> -->
+
+<!--出发地目的地样式-->
+<style>.location .wrapper{position:relative;height:51px;line-height:51px;position:relative}.location .wrapper:before,.location .wrapper:after{display:block;position:absolute;border-top:1px solid #ccc;left:0;width:100%;content:' '}.location .wrapper:before{display:none;top:0}.location .wrapper:after{display:block;bottom:0}.location .wrapper .i-from,.location .wrapper .i-to{position:relative;top:2px;left:-4px}.location .wrapper .i-from:before{color:#41b07b}.location .wrapper .i-to:before{color:#e37378}.location .wrapper .txt-from,.location .wrapper .txt-to{display:inline-block;height:49px;width:90%;overflow:hidden;vertical-align:top;font-size:1.4rem;color:#666}.location .wrapper .txt-from.default,.location .wrapper .txt-to.default{color:#fa8919}.location .wrapper .txt-from .fail-tip,.location .wrapper .txt-to .fail-tip{color:#adadad}</style>
+
+
+<style>
+body,html {
+	font-size: 62.5%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #fafafa;
+	font-family: 'PingFang SC',STHeitiSC-Light,Helvetica-Light,arial,sans-serif,'Droid Sans Fallback';
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none
+}
+
+@font-face {
+	font-family:home-icon;src:url(css/font/home-icon.eot);
+	src:url(css/font/home-icon.eot#iefix) format('embedded-opentype'),
+	url(css/font/home-icon.woff) format('woff'),
+	url(css/font/home-icon.ttf) format('truetype'),
+	url(css/font/home-icon.svg#home-icon) format('svg');
+	font-weight:400;
+	font-style:normal
+}
+
+
+
+@media (-webkit-min-device-pixel-ratio:1.5),(min-device-pixel-ratio:1.5) {
+	.border-1px::after,.border-1px::before {
+		-webkit-transform: scaleY(0.7);
+		-webkit-transform-origin: 0 0;
+		transform: scaleY(0.7)
+	}
+
+	.border-1px::after {
+		-webkit-transform-origin: left bottom
+	}
+}
+
+@media (-webkit-min-device-pixel-ratio:2),(min-device-pixel-ratio:2) {
+	.border-1px::after,.border-1px::before {
+		-webkit-transform: scaleY(0.5);
+		transform: scaleY(0.5)
+	}
+}
+
+i {
+	font-style: normal;
+	font-family: home-icon;
+	font-size: 1.4rem
+}
+
+i.i-close:before {
+	content: "\e602"
+}
+
+i.i-circle:before {
+	content: "\e605"
+}
+
+i.i-plus:before {
+	content: "\e604"
+}
+
+i.i-ticket:before {
+	content: "\e603"
+}
+
+i.i-user:before {
+	content: "\e600"
+}
+
+i.i-arrow:before {
+	content: "\6c"
+}
+
+i.i-arrow-down:before {
+	content: "\e903"
+}
+
+i.i-star:before {
+	content: "\e902"
+}
+
+i.i-open:before {
+	content: "\e905"
+}
+
+
+</style>
+
+
+<style type="text/css">
+#wrap {
+	height: auto;
+	min-height: 99%
+}
+#main {
+	width: 100%;
+	padding-bottom: 140px
+}
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+.clearfix {
+	display: inline-block
+}
+#subMenu {
+	height: 30px
+}
+.content {
+	width: 86%;
+	margin: 0 7%
+}
+#eta {
+	height: 72px
+}
+#btnMenu {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 20;
+	height: 50px
+}
+.user-menu {
+	width: 42px;
+	line-height: 23px;
+	margin-top: 12px;
+	text-align: center;
+	color: #878787;
+	border-right: 1px solid #e5e5e5
+}
+
+.user-menu .i-user {
+	position: relative;
+	top: 3px;
+	font-size: 1.6rem
+}
+
+.short-submit{
+	display: block;
+	margin: 1.1rem auto 0;
+	max-width: 640px;
+	width: 70%;
+	line-height: 2.71rem;
+	text-align: center;
+	border: 1px solid #00aaff;
+	color: #00aaff;
+	font-size: 1.29rem;
+	border-radius: 1.7rem;
+	-webkit-appearance: none;
+}
+</style>
+</head>
+<body>
+	<!--打车主界面-->
+	<div id="wrap"> 
+		<div id="main" class="clearfix"> 
+			<div id="subMenu"></div> 
+			<div class="content"> 
+				<div id="eta"></div> 
+				<div id="location">
+					<div class="location"> 
+						<div class="wrapper wrapper-from-hook border-1px"> 
+							<i class="i-from i-circle"></i>
+							<span class="txt-from txt-from-hook default">您在哪儿上车</span>
+						</div> 
+						<div class="wrapper wrapper-to-hook border-1px"> 
+						<i class="i-to i-circle"></i>
+						<span class="txt-to txt-to-hook default">您要去哪儿</span> 
+						</div>
+					</div>
+				</div> 
+				<a class="short-submit">立即叫车</a>
+			</div> 
+		</div>
+	</div>
+	<div id="btnMenu" style="display: block;"> 
+		<div class="user-menu"> 
+			<i class="i-user"></i> 
+		</div> 
+	</div>
+	<script type="text/javascript">
+		window.onload = getLocation();
+		$(".wrapper-from-hook").tap(function(){
+			location.href='startcity.html';
+		});
+		$(".wrapper-to-hook").tap(function(){
+			location.href='endcity.html';
+		});
+		$("#btnMenu").tap(function(){
+			location.href='login.html';
+		});
+		$(".short-submit").tap(function() {
+			userCar();
+		});
+	</script>
+</body>
+</html>
