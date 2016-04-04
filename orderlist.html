@@ -99,14 +99,14 @@ header {
 					 			 		}else if(list[i].status==0){
 											statusStr="处理中";
 					 			 		}
-										var doc = '<li class="item" applyid='+list[i].id+'><span class="datetime">'+list[i].apply_time+'</span><span class="udache">小滴哥专车</span><span class="tip"></span><span class="comment"><em>'+statusStr+'</em></span><span class="path-start">'+list[i].from_place+'</span><span class="path-end">'+list[i].to_place+'</span><span class="i-next"></span></li>';
+										var doc = '<li class="item" allotid='+list[i].allot_id+'><span class="datetime">'+list[i].apply_time+'</span><span class="udache">小滴哥专车</span><span class="tip"></span><span class="comment"><em>'+statusStr+'</em></span><span class="path-start">'+list[i].from_place+'</span><span class="path-end">'+list[i].to_place+'</span><span class="i-next"></span></li>';
 										 docs=docs+doc
 					 			 	}
 					 			 	document.getElementById("order_list").innerHTML=docs;
 					 			 	$(".finished-hook li").click(function(){
-					 			 		var applyid = $(this).attr("applyid");
-					 			 		location.href='detail.html?applyid='+applyid+"&token="+token;
-										console.log("applyid:"+applyid);
+					 			 		var allotid = $(this).attr("allotid");
+					 			 		location.href='detail.html?allotId='+allotid+"&token="+token;
+										console.log("allotid:"+allotid);
 									});
 					 			}else{
 					 				console.log("订单列表获取失败："+data.ret);

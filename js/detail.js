@@ -76,7 +76,7 @@ var applyId ;
 var token ;
 window.onload = getApplyId();
 function getApplyId() {
-	applyId = getUrlParam("applyid");
+	applyId = getUrlParam("allotId");
 	token =getUrlParam("token");
 	console.log("applyId:"+applyId+",token:"+token);
 	getOrderDetails(token,applyId);
@@ -90,9 +90,11 @@ function getUrlParam(name) {
 }
 
 //接口【OrderApply/applyDetail】的订单详情
-function getOrderDetails(token,applyId) {
-	var url = "http://119.29.137.98:80/Api/OrderApply/applyDetail?";
-	var prama = "apply_id="+applyId+"&token="+token;
+// http://119.29.137.98:80/Api/OrderApply/allotDetail
+// allot_id=1243&token=b34571d236861114ecadac640f0ef9f7
+function getOrderDetails(token,allot_id) {
+	var url = "http://119.29.137.98:80/Api/OrderApply/allotDetail?";
+	var prama = "allot_id="+allot_id+"&token="+token;
 	console.log(url+prama);
 	$.ajax({
 		type: 'POST',
@@ -202,15 +204,19 @@ function getDateil(status,data) {
 		break;
 		case '2':
 		document.write("2进行中");
+		finishing(data);
 		break;
 		case '3':
 		document.write("3 订单取消");
+		finishing(data);
 		break;
 		case '4':
 		document.write("4待支付");
+		finishing(data);
 		break;
 		case '5':
 		document.write("5待评价");
+		finishing(data);
 		break;
 		case '6':
 		document.write("6 已结束");
@@ -255,33 +261,38 @@ function processing(data) {
 // 6 已结束
 function finishing(data) {
 
-
-
-    // document.write(from_place);
-    // document.write(to_place);
-
+	document.write("<hr>");
+	/*乘客信息*/
     document.write(p_name+"<br>");
     document.write(p_phone+"<br>");
     document.write(start_time+"<br>");
+	
+	/*地址信息*/
+	document.write("<hr>");
     document.write(from_place+"<br>");
     document.write(to_place+"<br>");
 
-    document.write(+"<hr>");
-
+    /*司机信息*/
+    document.write("<hr>");
+    document.write(driver_photo_url+"<br>");
 	document.write(driver_real_name+"<br>");
 	document.write(driver_phone+"<br>");
-	document.write(driver_level+"<br>");
+	document.write(star_level+"<br>");
     document.write(driver_allot_no+"<br>");
     document.write(brand+"<br>");
     document.write(car_license_plate+"<br>");
-    document.write("<hr>")
+
+    /*里程及附加费用信息*/
+    document.write("<hr>");
     document.write(odometer+"<br>");
     document.write(parking_fee+"<br>");
     document.write(tolls+"<br>");
     document.write(other_fee+"<br>");
     document.write(other_fee_desc+"<br>");
 
-	document.write(other_fee_desc+"<br>");
+
+	document.write("<hr>");
+	document.write(driver_level+"<br>");
 	document.write(comment+"<br>");    
 }
 
@@ -363,7 +374,7 @@ function pay_order (argument) {
 */
 //评论
 // http://119.29.137.98:80/Api/OrderApply/pAppraisal
-apply_id=3005&service_level=5&driver_level=2&comment=%E8%AF%84%E4%BB%B7%E4%B8%8D%E6%BB%A1%E6%84%8F&token=6732242f9db4cea8645dadb1cfec227f
+// apply_id=3005&service_level=5&driver_level=2&comment=%E8%AF%84%E4%BB%B7%E4%B8%8D%E6%BB%A1%E6%84%8F&token=6732242f9db4cea8645dadb1cfec227f
 function set_comments (argument) {
 	var url = "http://119.29.137.98:80/Api/OrderApply/doAutoAllot/?";
 	var prama = "apply_id="+apply_id+"&service_level="+service_level+"&driver_level="+driver_level+"&comment="+comment+"&token="+token;
