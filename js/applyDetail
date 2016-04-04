@@ -1,0 +1,139 @@
+	var allot_id = data.data.allot_id; //"1241", 
+	var allot_number = data.data.allot_number; //": "D20160401115148449", 
+    var allot_time=data.data.allot_time ;  // "2016-04-01 11:51:57", 
+    var start_time=data.data.start_time ;  // "2016-04-01 00:00:00", 
+    var end_time=data.data.end_time ;  // "2016-04-01 00:00:00", 
+    var go_time=data.data.go_time ;  // "2016-04-01 18:43:15", 
+    var arrival_time=data.data.arrival_time ;  // "2016-04-01 18:44:29", 
+    var status=data.data.status ;  // "6", 
+    var car_id=data.data.car_id ;  // "134", 
+    var driver_id=data.data.driver_id ;  // "205", 
+    var wait_start_time=data.data.wait_start_time ;  // 1459507389, 
+    var wait_time=data.data.wait_time ;  // 0.1, 
+    var odometer=data.data.odometer ;  // "0.00", 
+    var long_distance=data.data.long_distance ;  // 0, 
+    var long_distance_fee=data.data.long_distance_fee ;  // "0.00", 
+    var use_time=data.data.use_time ;  // "74.00", 
+    var money=data.data.money ;  // "5.80", 
+    var mileage=data.data.mileage ;  // "5.00", 
+    var parking_fee=data.data.parking_fee ;  // "0.00", 
+    var tolls=data.data.tolls ;  // "0.00", 
+    var low_fee=data.data.low_fee ;  // "0.80", 
+    var wait_fee=data.data.wait_fee ;  // "0.00", 
+    var night_fee=data.data.night_fee ;  // "0.00", 
+    var other_fee=data.data.other_fee ;  // "0.00", 
+    var other_fee_desc=data.data.other_fee_desc ;  // "", 
+    var low_speed_time=data.data.low_speed_time ;  // "75", 
+    var apply_id=data.data.apply_id ;  // "3004", 
+    var apply_number=data.data.apply_number ;  // "P20160401115181189", 
+    var type=data.data.type ;  // "1", 
+    var use_way=data.data.use_way ;  // "1", 
+    var use_type=data.data.use_type ;  // "1", 
+    var from_place=data.data.from_place ;  // "世界之窗", 
+    var to_place=data.data.to_place ;  // "科发路", 
+    var apply_time=data.data.apply_time ;  // "2016-04-01 11:51:46", 
+    var pid=data.data.pid ;  // "219", 
+    var p_company=data.data.p_company ;  // "深圳小滴哥公司", 
+    var from_lon=data.data.from_lon ;  // "113.98044", 
+    var from_lat=data.data.from_lat ;  // "22.54229", 
+    var from_address=data.data.from_address ;  // "深圳市", 
+    var to_address=data.data.to_address ;  // "深圳市", 
+    var to_lon=data.data.to_lon ;  // "113.95776", 
+    var to_lat=data.data.to_lat ;  // "22.54897", 
+    var p_name=data.data.p_name ;  // "小张", 
+    var p_count=data.data.p_count ;  // "1", 
+    var p_phone=data.data.p_phone ;  // "17080951305", 
+    var f_odometer=data.data.f_odometer ;  // "0.00", 
+    var f_hour=data.data.f_hour ;  // "0.00", 
+    var f_money=data.data.f_money ;  // "0.00", 
+    var f_subsist=data.data.f_subsist ;  // "0.00", 
+    var flight_number=data.data.flight_number ;  // "", 
+    var subsist=data.data.subsist ;  // "0.00", 
+    var model_id=data.data.model_id ;  // "65", 
+    var through_id=data.data.through_id ;  // "0", 
+    var is_go_back=data.data.is_go_back ;  // "0", 
+    var car_model_name=data.data.car_model_name ;  // "深圳测试车型", 
+    var car_through_name=data.data.car_through_name ;  // "", 
+    var comment=data.data.comment ;  // "经历了", 
+    var driver_level=data.data.driver_level ;  // "5", 
+    var service_level=data.data.service_level ;  // "5", 
+    var photo_url=data.data.photo_url ;  // "/Uploads/2016/0324/56f3419867735.png", 
+    var car_license_plate=data.data.car_license_plate ;  // "京A555", 
+    var brand=data.data.brand ;  // "奥克斯  瑞途", 
+    var driver_real_name=data.data.driver_real_name ;  // "小张_司机", 
+    var driver_phone=data.data.driver_phone ;  // "17080951305", 
+    var driver_photo_url=data.data.driver_photo_url ;  // "", 
+    var star_level=data.data.star_level ;  // "5.00", 
+    var driver_allot_no=data.data.driver_allot_no;  // "4", 
+    var driver_lon=data.data.driver_lon ;  // 113.953776, 
+    var driver_lat=data.data.driver_lat ;  // 22.552041
+
+        var allot_id ;
+    var allot_number ;
+    var allot_time;
+    var start_time;
+    var end_time;
+    var go_time;
+    var arrival_time;
+    var status;
+    var car_id;
+    var driver_id;
+    var wait_start_time;
+    var wait_time;
+    var odometer;
+    var long_distance;
+    var long_distance_fee;
+    var use_time;
+    var money;
+    var mileage;
+    var parking_fee;
+    var tolls;
+    var low_fee;
+    var wait_fee;
+    var night_fee;
+    var other_fee;
+    var other_fee_desc;
+    var low_speed_time;
+    var apply_id;
+    var apply_number;
+    var type;
+    var use_way;
+    var use_type;
+    var from_place;
+    var to_place;
+    var apply_time;
+    var pid;
+    var p_company;
+    var from_lon;
+    var from_lat;
+    var from_address;
+    var to_address;
+    var to_lon;
+    var to_lat;
+    var p_name;
+    var p_count;
+    var p_phone;
+    var f_odometer;
+    var f_hour;
+    var f_money;
+    var f_subsist;
+    var flight_number;
+    var subsist;
+    var model_id;
+    var through_id;
+    var is_go_back;
+    var car_model_name;
+    var car_through_name;
+    var comment;
+    var driver_level;
+    var service_level;
+    var photo_url;
+    var car_license_plate;
+    var brand;
+    var driver_real_name;
+    var driver_phone;
+    var driver_photo_url;
+    var star_level;
+    var driver_allot_no;
+    var driver_lon;
+    var driver_lat;
